@@ -1,6 +1,11 @@
 import React from "react";
 
+import Button from "@material-ui/core/Button";
+import AddIcon from '@material-ui/icons/Add';
+
+import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -12,6 +17,7 @@ class App extends React.Component {
         this.addNewCourse = this.addNewCourse.bind(this);
 
         this.state = {
+            semesters: [],
             courses: [                     
                 <Course 
                 onChange={this.logCourseInfo} //takes the grade information from the Course component and throws it to the state to do calculations
@@ -82,23 +88,44 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <h1>TSA Unofficial GPA Calculator</h1>
-                <table className="center">
-                    <thead>
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Grade</th>
-                            <th>Credits</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.courses}
-                    </tbody>
-                </table>
-                <button onClick={this.addNewCourse}>Add New Course</button>
-                <h3>Your GPA is</h3>
-                <h1>{this.state.GPA}</h1>
+                <div className="container">
+                    <h1>TSA Unofficial GPA Calculator</h1>
+                    <div className="row">
+                        <div className="col">
+                            <div className="card">
+                                <table className="center">
+                                    <thead>
+                                        <tr>
+                                            <th>Course Name</th>
+                                            <th>Grade</th>
+                                            <th>Credits</th>
+                                            <th>Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.courses}
+                                    </tbody>
+                                </table>
+                                <Button 
+                                variant="contained"
+                                color="secondary"
+                                startIcon={<AddIcon/>}
+                                onClick={this.addNewCourse}
+                                >
+                                Add Course
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div id="gpa-results">
+                                <h3>Your GPA is</h3>
+                                <div className="card" id="gpa-card">
+                                    <h1>{this.state.GPA}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
